@@ -24,7 +24,7 @@ EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="a
 
 <body>
     <div class="container">
-        <p class="p-2 bg-primary text-white">Gestión de Chollos</p>
+        <p class="p-2 bg-primary text-white">Chollo ░▒▓ Ofertas</p>
         <nav>
             <!-- AQUÍ TENÉIS QUE INCLUIR EL MENÚ DE NAVEGACIÓN -->
             @include('partials.nav')
