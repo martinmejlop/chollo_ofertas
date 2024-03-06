@@ -12,7 +12,7 @@ class CholloController extends Controller
      */
     public function index()
     {
-        $cholloList = Chollo::orderBy('titulo')->paginate(8);
+        $cholloList = Chollo::all();
         return view('chollos.index', compact('cholloList'));
     }
 
