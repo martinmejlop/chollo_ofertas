@@ -18,7 +18,7 @@ class CholloController extends Controller
 
     public function destacados()
     {
-        $cholloList = Chollo::orderBy('puntuacion', 'desc')->paginate(5);
+        $cholloList = Chollo::orderBy('puntuacion', 'desc')->paginate();
         return view('chollos.destacados', compact('cholloList'));
     }
 
