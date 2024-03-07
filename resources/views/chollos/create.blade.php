@@ -38,6 +38,13 @@
                 <label for="precio_descuento">Precio con Descuento:</label>
                 <input type="number" name="precio_descuento" class="form-control" value="{{ old('precio_descuento') }}" required>
             </div>
+            <div class="form-group">
+                <label for="disponible">Disponibilidad:</label>
+                <td><select name="disponible">
+                    <option value="1">Disponible</option>
+                    <option value="0">No Disponible</option>
+                    </select></td>
+            </div>
             <button type="submit" class="btn btn-primary">Guardar Chollo</button>
         </form>
     </div>
