@@ -6,14 +6,7 @@
 
     <div class="container">
         <h2>Lista de Chollos Destacados</h2>
-
-        <!-- Aquí se mostrarán los Mensajes -->
-        @if (session('mensaje'))
-            <div class='alert alert-success'>
-                {{ session('mensaje') }}
-            </div>
-        @endif
-
+        
         <table class="table mt-3">
             <thead>
                 <tr>
@@ -26,7 +19,6 @@
                     <th>Precio</th>
                     <th>Precio Descuento</th>
                     <th>Disponible</th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
