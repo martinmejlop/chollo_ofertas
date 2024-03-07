@@ -14,4 +14,5 @@ use App\Http\Controllers\CholloController;
 */
 
 Route::get('/', [CholloController::class, 'index'])->name('chollos.index');
+Route::get('/destacados', [CholloController::class, 'destacados'])->name('chollos.destacados');
 Route::resource('chollos', 'App\Http\Controllers\CholloController');
