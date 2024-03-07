@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="url">URL:</label>
-                <input type="text" name="url" class="form-control" value="{{ old('url') }}" required>
+                <input type="url" name="url" class="form-control" value="{{ old('url') }}" required>
             </div>
             <div class="form-group">
                 <label for="categoria">Categoria:</label>
@@ -28,23 +28,15 @@
             </div>
             <div class="form-group">
                 <label for="puntuacion">Puntuacion:</label>
-                <input type="text" name="puntuacion" class="form-control" value="{{ old('puntuacion') }}" required>
+                <input type="number" name="puntuacion" class="form-control" value="{{ old('puntuacion') }}" required>
             </div>
             <div class="form-group">
                 <label for="precio">Precio:</label>
-                <input type="text" name="precio" class="form-control" value="{{ old('precio') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="precio">Precio:</label>
-                <input type="text" name="precio" class="form-control" value="{{ old('precio') }}" required>
+                <input type="number" name="precio" class="form-control" value="{{ old('precio') }}" required>
             </div>
             <div class="form-group">
                 <label for="precio_descuento">Precio con Descuento:</label>
-                <input type="text" name="precio_descuento" class="form-control" value="{{ old('precio_descuento') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="disponible">Disponibilidad:</label>
-                <input type="text" name="disponible" class="form-control" value="{{ old('disponible') }}" required>
+                <input type="number" name="precio_descuento" class="form-control" value="{{ old('precio_descuento') }}" required>
             </div>
             <button type="submit" class="btn btn-primary">Guardar Chollo</button>
         </form>
