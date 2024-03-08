@@ -1,12 +1,12 @@
 @extends('layouts.plantilla')
-@section('titulo', 'Inicio')
+@section('titulo', 'Destacados')
 
 @section('contenido')
 
 
     <div class="container">
         <h2>Lista de Chollos Destacados</h2>
-        
+
         <table class="table mt-3">
             <thead>
                 <tr>

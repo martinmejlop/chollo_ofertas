@@ -1,6 +1,6 @@
 @extends('layouts.plantilla')
 
-@section('titulo', 'Edición de Usuarios')
+@section('titulo', 'Edición de Chollos')
 
 @section('contenido')
     <div class="container">

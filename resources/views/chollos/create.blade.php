@@ -50,12 +50,12 @@
                     required>
             </div>
             <div class="form-group">
-                <label for="disponible">Disponibilidad:</label>
+                <label for="disponible">Disponibilidad:</label><br>
                 <td><select name="disponible">
                         <option value="1">Disponible</option>
                         <option value="0">No Disponible</option>
                     </select></td>
-            </div>
+            </div><br>
             <button type="submit" class="btn btn-primary">Guardar Chollo</button>
         </form>
     </div>

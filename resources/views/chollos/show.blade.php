@@ -1,11 +1,10 @@
 @extends('layouts.plantilla')
 
-@section('titulo', 'Detalle de Usuarios')
+@section('titulo', 'Detalle de Chollos')
 
 @section('contenido')
     <div class="container">
         <h2>Detalles del Chollo</h2>
-
         <p><strong>ID:</strong>{{ $chollo->id }}</p>
         <p><strong>Título:</strong>{{ $chollo->titulo }}</p>
         <p><strong>Descripción:</strong>{{ $chollo->descripcion }}</p>
@@ -17,5 +16,6 @@
         <p><strong>Disponibilidad:</strong>{{ $chollo->disponible }}</p>
         <a href="{{ route('chollos.index') }}" class="btn btn-secondary">Volver a la lista de chollos</a>
     </div>
-
 @endsection
+
+

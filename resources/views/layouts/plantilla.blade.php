@@ -2,24 +2,25 @@
 <html lang="es">
 
 <head>
-     <!-- Aquí está la librería de bootstrap -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-     integrity="sha384-
-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
- <!-- Fonts -->
- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600; 700&display=swap" rel="stylesheet">
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>@yield('titulo')</title>
     <style>
-        body {
-            font-family: 'Nunito', sans-serif;
+        .container {
+            max-width: 100%; /* Ancho máximo del contenido */
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
         }
+        img{
+    width: 200px; /* Ancho deseado */
+    height: auto; /* Para mantener la proporción de aspecto */
+}
+
     </style>
-
-
 </head>
 
 <body>
@@ -31,9 +32,9 @@ EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="a
 
         </nav>
         @yield('contenido')
-        
+
     </div>
 
-    <footer>©CholloOfertas 2024</footer>
+    <footer class="fixed-bottom bg-dark text-white text-center py-2">©CholloOfertas 2024</footer>
 </body>
 </html>

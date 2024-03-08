@@ -9,7 +9,7 @@
 
         <!-- Aquí se mostrarán los Mensajes -->
         @if (session('mensaje'))
-            <div class='alert alert-success'>
+        <div class="alert alert-success" role="alert">
                 {{ session('mensaje') }}
             </div>
         @endif
@@ -35,7 +35,7 @@
 
                 @foreach ($cholloList as $chollo)
                     <tr>
-                        <td><img src='img/cholloofertas-{{ $chollo->id }}.jpg'></td>
+                        <td><img src='img/cholloofertas-{{ $chollo->id }}.jpg' class="img-thumbnail"></td>
                         <td> {{ $chollo->id }} </td>
                         <td> {{ $chollo->titulo }} </td>
                         <td> {{ $chollo->descripcion }} </td>
