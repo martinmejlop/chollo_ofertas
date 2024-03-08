@@ -17,6 +17,7 @@
         <table class="table mt-3">
             <thead>
                 <tr>
+                    <th>Imagen</th>
                     <th>ID</th>
                     <th>Titulo</th>
                     <th>Descripcion</th>
@@ -34,6 +35,7 @@
 
                 @foreach ($cholloList as $chollo)
                     <tr>
+                        <td><img src='img/cholloofertas-{{ $chollo->id }}.jpg'></td>
                         <td> {{ $chollo->id }} </td>
                         <td> {{ $chollo->titulo }} </td>
                         <td> {{ $chollo->descripcion }} </td>

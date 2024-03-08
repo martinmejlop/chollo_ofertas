@@ -40,10 +40,19 @@ class CholloController extends Controller
             'descripcion' => 'required',
             'url' => 'required',
             'categoria' => 'required',
-            'puntuacion'=>'required',
-            'precio'=>'required',
-            'precio_descuento'=>'required',
-            'disponible'=>'required'
+            'puntuacion' => 'required',
+            'precio' => 'required',
+            'precio_descuento' => 'required',
+            'disponible' => 'required'
+        ], [
+            'titulo.required' => 'El titulo es obligatorio',
+            'descripcion.required' => 'La descripcion es obligatoria',
+            'url.required' => 'La url es obligatoria',
+            'categoria.required' => 'La categoria es obligatoria',
+            'puntuacion.required' => 'La puntuacion es obligatoria',
+            'precio.required' => 'El precio es obligatorio',
+            'precio_descuento.required' => 'El precio de descuento es obligatorio',
+            'disponible.required' => 'La disponibilidad es obligatoria',
         ]);
 
         Chollo::create($request->all());
@@ -79,10 +88,19 @@ class CholloController extends Controller
             'descripcion' => 'required',
             'url' => 'required',
             'categoria' => 'required',
-            'puntuacion'=>'required',
-            'precio'=>'required',
-            'precio_descuento'=>'required',
-            'disponible'=>'required'
+            'puntuacion' => 'required',
+            'precio' => 'required',
+            'precio_descuento' => 'required',
+            'disponible' => 'required'
+        ], [
+            'titulo.required' => 'El titulo es obligatorio',
+            'descripcion.required' => 'La descripcion es obligatoria',
+            'url.required' => 'La url es obligatoria',
+            'categoria.required' => 'La categoria es obligatoria',
+            'puntuacion.required' => 'La puntuacion es obligatoria',
+            'precio.required' => 'El precio es obligatorio',
+            'precio_descuento.required' => 'El precio de descuento es obligatorio',
+            'disponible.required' => 'La disponibilidad es obligatoria',
         ]);
 
         $chollo = Chollo::findOrFail($id);

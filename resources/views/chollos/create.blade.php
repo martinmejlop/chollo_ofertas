@@ -1,13 +1,23 @@
 @extends('layouts.plantilla')
 
-@section('titulo','Alta de Chollos')
+@section('titulo', 'Alta de Chollos')
 
 @section('contenido')
     <div class="container">
         <h2>Agregar Chollo</h2>
 
-<!-- Agrega la ruta -->
-        <form action="{{route('chollos.store')}}" method="POST">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- Agrega la ruta -->
+        <form action="{{ route('chollos.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="titulo">Titulo:</label>
@@ -36,13 +46,14 @@
             </div>
             <div class="form-group">
                 <label for="precio_descuento">Precio con Descuento:</label>
-                <input type="number" name="precio_descuento" class="form-control" value="{{ old('precio_descuento') }}" required>
+                <input type="number" name="precio_descuento" class="form-control" value="{{ old('precio_descuento') }}"
+                    required>
             </div>
             <div class="form-group">
                 <label for="disponible">Disponibilidad:</label>
                 <td><select name="disponible">
-                    <option value="1">Disponible</option>
-                    <option value="0">No Disponible</option>
+                        <option value="1">Disponible</option>
+                        <option value="0">No Disponible</option>
                     </select></td>
             </div>
             <button type="submit" class="btn btn-primary">Guardar Chollo</button>
