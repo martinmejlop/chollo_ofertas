@@ -26,7 +26,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Instalar dependencias de PHP
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 # Instalar mysql-client para el script de inicialización
 RUN apt-get install -y default-mysql-client
@@ -36,11 +36,20 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
+# Optimizar para producción
+RUN php artisan config:cache \
+    && php artisan route:cache \
+    && php artisan view:cache
+
 # Copiar archivo de configuración de Apache
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
+
+# Copiar script de inicialización
+COPY railway-start.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/railway-start.sh
 
 # Exponer puerto 80
 EXPOSE 80
 
-# Comando para iniciar Apache
-CMD ["apache2-foreground"] 
+# Comando para iniciar con script de Railway
+CMD ["/usr/local/bin/railway-start.sh"] 
