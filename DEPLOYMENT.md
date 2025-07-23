@@ -1,8 +1,8 @@
-# 🚀 Guía de Despliegue en Railway
+# 🚀 Guía de Despliegue en Render
 
 ## 📋 Requisitos Previos
 
-- Cuenta en [Railway](https://railway.app)
+- Cuenta en [Render](https://render.com)
 - Cuenta en [GitHub](https://github.com)
 - Proyecto subido a GitHub
 
@@ -14,133 +14,139 @@
 # Inicializar git (si no está hecho)
 git init
 git add .
-git commit -m "Preparado para despliegue en Railway"
+git commit -m "Preparado para despliegue en Render"
 
 # Crear repositorio en GitHub y subir
 git remote add origin https://github.com/tu-usuario/chollo-ofertas.git
 git push -u origin main
 ```
 
-### 2. Configurar Railway
+### 2. Configurar Render
 
-1. **Crear cuenta en Railway**
-   - Ve a [railway.app](https://railway.app)
+1. **Crear cuenta en Render**
+   - Ve a [render.com](https://render.com)
    - Regístrate con tu cuenta de GitHub
 
 2. **Crear nuevo proyecto**
-   - Haz clic en "New Project"
-   - Selecciona "Deploy from GitHub repo"
-   - Busca y selecciona tu repositorio `chollo-ofertas`
+   - Haz clic en "New +"
+   - Selecciona "Blueprint"
+   - Conecta tu repositorio de GitHub
+   - Render detectará automáticamente el `render.yaml`
 
 3. **Configurar servicios**
-   - Railway detectará automáticamente el `docker-compose.yml`
-   - Creará dos servicios: `app` y `db`
+   - Render creará automáticamente:
+     - Servicio web para la aplicación
+     - Base de datos PostgreSQL
 
-### 3. Configurar Variables de Entorno
+### 3. Configuración Automática
 
-En Railway, ve a la pestaña "Variables" y configura:
+El archivo `render.yaml` ya está configurado con:
 
-```env
-APP_NAME="Chollo Ofertas"
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://tu-app.railway.app
+```yaml
+services:
+  - type: web
+    name: chollo-ofertas
+    env: php
+    plan: free
+    buildCommand: composer install --no-dev --optimize-autoloader
+    startCommand: php artisan serve --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DB_CONNECTION
+        value: pgsql
+      # ... más configuraciones automáticas
 
-LOG_CHANNEL=stack
-LOG_LEVEL=error
-
-DB_CONNECTION=mysql
-DB_HOST=${DB_HOST}
-DB_PORT=${DB_PORT}
-DB_DATABASE=${DB_DATABASE}
-DB_USERNAME=${DB_USERNAME}
-DB_PASSWORD=${DB_PASSWORD}
-
-CACHE_DRIVER=file
-FILESYSTEM_DISK=local
-QUEUE_CONNECTION=sync
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-
-SESSION_SECURE_COOKIE=true
-SESSION_SAME_SITE=strict
+databases:
+  - name: chollo-ofertas-db
+    databaseName: chollo_ofertas
+    user: chollo_user
+    plan: free
 ```
 
-### 4. Configurar Base de Datos
+### 4. Variables de Entorno
 
-1. **Crear servicio MySQL**
-   - En Railway, haz clic en "New Service"
-   - Selecciona "Database" → "MySQL"
-   - Railway generará automáticamente las variables de entorno
+Render configurará automáticamente:
 
-2. **Conectar servicios**
-   - En el servicio de la app, ve a "Settings"
-   - En "Connect" selecciona tu base de datos MySQL
+```env
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=generado_automáticamente
+DB_CONNECTION=pgsql
+DB_HOST=desde_base_de_datos
+DB_PORT=5432
+DB_DATABASE=chollo_ofertas
+DB_USERNAME=chollo_user
+DB_PASSWORD=generado_automáticamente
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+LOG_CHANNEL=stack
+LOG_LEVEL=error
+```
 
 ### 5. Desplegar
 
 1. **Trigger deployment**
    - Haz un push a GitHub: `git push origin main`
-   - Railway detectará los cambios y desplegará automáticamente
+   - Render detectará los cambios y desplegará automáticamente
 
 2. **Verificar logs**
-   - En Railway, ve a la pestaña "Deployments"
+   - En Render, ve a tu servicio web
    - Revisa los logs para asegurar que todo funciona
 
 ### 6. Configurar Dominio
 
 1. **Obtener URL**
-   - Railway te dará una URL como: `https://tu-app.railway.app`
-   - Actualiza `APP_URL` en las variables de entorno
+   - Render te dará una URL como: `https://chollo-ofertas.onrender.com`
+   - La URL se actualiza automáticamente
 
 2. **Dominio personalizado (opcional)**
-   - En "Settings" → "Domains"
+   - En "Settings" → "Custom Domains"
    - Agrega tu dominio personalizado
 
 ## 🔐 Credenciales de Administrador
 
 Una vez desplegado, para acceder al panel de administración:
 
-- **URL**: `https://tu-app.railway.app/chollos/create`
+- **URL**: `https://tu-app.onrender.com/chollos/create`
 - **Usuario**: `admin`
 - **Contraseña**: `chollo2024`
 
 ## 📊 Monitoreo
 
-- **Logs**: En Railway → "Deployments" → "View Logs"
-- **Métricas**: En Railway → "Metrics"
-- **Base de datos**: En Railway → "Database" → "Connect"
+- **Logs**: En Render → tu servicio → "Logs"
+- **Métricas**: En Render → tu servicio → "Metrics"
+- **Base de datos**: En Render → "Databases"
 
 ## 🔧 Comandos Útiles
 
 ```bash
 # Ver logs en tiempo real
-railway logs
+render logs
 
 # Ejecutar comandos en el servidor
-railway run php artisan migrate
+render run php artisan migrate
 
 # Acceder al servidor
-railway shell
+render shell
 ```
 
 ## 🚨 Solución de Problemas
 
 ### Error de Base de Datos
 - Verifica que las variables de entorno estén correctas
-- Asegúrate de que el servicio MySQL esté conectado
+- Asegúrate de que la base de datos PostgreSQL esté conectada
 
 ### Error de Permisos
-- Los permisos se configuran automáticamente en el script de inicio
+- Los permisos se configuran automáticamente
 
 ### Error de Caché
-- Railway limpia automáticamente la caché en cada despliegue
+- Render ejecuta automáticamente los comandos de optimización
 
 ## 💰 Costos
 
-- **Gratuito**: $5 de crédito mensual
-- **Estimado**: ~$2-3/mes para este proyecto
-- **Escalable**: Puedes pagar más si necesitas más recursos
+- **Gratuito**: Plan free de Render
+- **Base de datos**: PostgreSQL gratuita incluida
+- **Ancho de banda**: 750 horas/mes gratuitas
 
 ## 🔄 Actualizaciones
 
@@ -152,8 +158,16 @@ git commit -m "Nueva funcionalidad"
 git push origin main
 ```
 
-Railway detectará los cambios y desplegará automáticamente.
+Render detectará los cambios y desplegará automáticamente.
+
+## 🗄️ Base de Datos PostgreSQL
+
+Tu aplicación ahora usa PostgreSQL en lugar de MySQL:
+
+- **Ventajas**: Más potente, mejor rendimiento
+- **Compatibilidad**: Laravel maneja automáticamente las diferencias
+- **Migración**: Se ejecuta automáticamente en el despliegue
 
 ---
 
-**¡Tu aplicación estará disponible en `https://tu-app.railway.app`!** 🎉 
+**¡Tu aplicación estará disponible en `https://tu-app.onrender.com`!** 🎉 
