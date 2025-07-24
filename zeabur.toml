@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "php artisan serve --host 0.0.0.0 --port $PORT"
+startCommand = "chmod +x start-zeabur.sh && ./start-zeabur.sh"
 healthCheckPath = "/"
 
 [env]
@@ -12,4 +12,5 @@ CACHE_DRIVER = "file"
 SESSION_DRIVER = "file"
 SESSION_LIFETIME = "120"
 LOG_CHANNEL = "stack"
-LOG_LEVEL = "error" 
+LOG_LEVEL = "error"
+DB_CONNECTION = "mysql" 
