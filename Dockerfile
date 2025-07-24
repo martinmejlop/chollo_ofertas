@@ -28,9 +28,9 @@ WORKDIR /var/www/html
 COPY . .
 
 # Crear directorios necesarios y configurar permisos ANTES de cambiar usuario
-RUN mkdir -p /var/www/html/bootstrap/cache /var/www/html/public/build \
-    && chown -R www-data:www-data /var/www/html/bootstrap/cache /var/www/html/public \
-    && chmod -R 755 /var/www/html/bootstrap/cache /var/www/html/public
+RUN mkdir -p /var/www/html/vendor /var/www/html/bootstrap/cache /var/www/html/public/build \
+    && chown -R www-data:www-data /var/www/html/vendor /var/www/html/bootstrap/cache /var/www/html/public \
+    && chmod -R 755 /var/www/html/vendor /var/www/html/bootstrap/cache /var/www/html/public
 
 # Cambiar a usuario www-data para ejecutar composer y npm
 USER www-data
