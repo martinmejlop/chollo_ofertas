@@ -2,7 +2,7 @@
 builder = "dockerfile"
 
 [deploy]
-startCommand = "apache2-foreground"
+startCommand = "chmod +x start-zeabur.sh && ./start-zeabur.sh"
 healthCheckPath = "/"
 
 [env]
