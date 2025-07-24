@@ -37,8 +37,12 @@ RUN chown -R www-data:www-data /var/www/html \
 # Copiar archivo de configuración de Apache
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
+# Copiar y configurar script de inicio
+COPY start.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/start.sh
+
 # Exponer puerto 80
 EXPOSE 80
 
-# Comando para iniciar Apache
-CMD ["apache2-foreground"] 
+# Comando para iniciar con script personalizado
+CMD ["/usr/local/bin/start.sh"] 
