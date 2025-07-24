@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     libzip-dev \
+    nodejs \
+    npm \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Habilitar mod_rewrite para Apache
@@ -25,10 +27,23 @@ WORKDIR /var/www/html
 # Copiar archivos del proyecto
 COPY . .
 
-# Instalar dependencias de PHP
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+# Crear directorios necesarios y configurar permisos ANTES de cambiar usuario
+RUN mkdir -p /var/www/html/bootstrap/cache /var/www/html/public/build \
+    && chown -R www-data:www-data /var/www/html/bootstrap/cache /var/www/html/public \
+    && chmod -R 755 /var/www/html/bootstrap/cache /var/www/html/public
 
-# Configurar permisos
+# Cambiar a usuario www-data para ejecutar composer y npm
+USER www-data
+
+# Instalar dependencias de PHP y Node.js
+RUN set -eux \
+    && if [ -f composer.json ]; then composer install --optimize-autoloader --classmap-authoritative --no-dev; fi \
+    && if [ -f package.json ]; then npm install && npm run build; fi
+
+# Volver a root para configurar Apache
+USER root
+
+# Configurar permisos finales
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache

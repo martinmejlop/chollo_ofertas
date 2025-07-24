@@ -41,12 +41,14 @@ fi
 echo "🔐 Configurando permisos..."
 chmod -R 775 storage
 chmod -R 775 bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
+chmod -R 775 public/build 2>/dev/null || true
+chown -R www-data:www-data storage bootstrap/cache public/build 2>/dev/null || true
 
 # Verificar que los directorios son escribibles
 echo "📁 Verificando permisos de directorios..."
 ls -la storage/
 ls -la bootstrap/cache/
+ls -la public/ 2>/dev/null || echo "Directorio public no encontrado"
 
 # Ejecutar migraciones si la base de datos está disponible
 if [ -n "$DB_HOST" ] && [ -n "$DB_DATABASE" ]; then
