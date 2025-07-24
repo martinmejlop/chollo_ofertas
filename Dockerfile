@@ -11,8 +11,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     libzip-dev \
-    libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql pdo_mysql mbstring exif pcntl bcmath gd zip
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Habilitar mod_rewrite para Apache
 RUN a2enmod rewrite
@@ -37,12 +36,8 @@ RUN chown -R www-data:www-data /var/www/html \
 # Copiar archivo de configuración de Apache
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Copiar y configurar script de inicio
-COPY start.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/start.sh
-
 # Exponer puerto 80
 EXPOSE 80
 
-# Comando para iniciar con script personalizado
-CMD ["/usr/local/bin/start.sh"] 
+# Comando para iniciar Apache
+CMD ["apache2-foreground"] 
